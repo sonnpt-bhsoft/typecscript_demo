@@ -1,3 +1,28 @@
+interface IsPerson {
+    name: string;
+    age: number;
+    speak(a: string): void;
+    spend(a: number): number;
+}
+
+const me: IsPerson = {
+    name: 'Joker',
+    age: 21,
+    speak(text: string){
+        console.log(text);
+    },
+    spend(amount: number){
+        console.log('I spend', amount);
+        return amount;
+    }
+};
+
+const greetPerson = (person: IsPerson) => {
+    console.log('hello', person.name);
+}
+
+greetPerson(me); // this param have to be matched with interface IsPerson
+
 import { Invoice } from './classes/Invoice.js'
 
 const invoiceOne = new Invoice( 'mario', 'working on the mario website', 250);
