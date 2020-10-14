@@ -1,14 +1,4 @@
-class Invoice { 
-    constructor(
-        readonly client: string, // read only both outside/inside but not change value
-        private details: string, // change inside of the class not outside
-        public amount: number // default: can change and read the value outside/inside of the class
-    ){}
-
-    format() {
-        return `${this.client} owes ${this.amount} for ${this.details}`;
-    }
-}
+import { Invoice } from './classes/Invoice.js'
 
 const invoiceOne = new Invoice( 'mario', 'working on the mario website', 250);
 const invoiceTwo = new Invoice( 'luigi', 'working on the luigi website', 300)
