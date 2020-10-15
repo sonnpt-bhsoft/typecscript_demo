@@ -1,23 +1,6 @@
 import { Invoice } from './classes/Invoice.js';
 import { ListTemplate } from './classes/listTemplate.js';
 import { Payment } from './classes/Payment.js';
-// let docOne: hasFormatter;
-// let docTwo: hasFormatter;
-// docOne = new Invoice('mario', 'web work', 250);
-// docTwo = new Payment('joker', 'thaison', 200);
-// let docs: hasFormatter[] = [];
-// docs.push(docOne);
-// docs.push(docTwo);
-// console.log(docs);
-// const invoiceOne = new Invoice( 'mario', 'working on the mario website', 250);
-// const invoiceTwo = new Invoice( 'luigi', 'working on the luigi website', 300)
-// let invoices: Invoice[] = [];
-// invoices.push(invoiceOne);
-// invoices.push(invoiceTwo);
-// invoices.forEach(inv => {
-//     console.log(inv.client, inv.amount, inv.format());
-// })
-// const form = document.querySelector('form')!
 const form = document.querySelector('.new-item-form');
 // inputs
 const type = document.querySelector('#type');
@@ -38,3 +21,37 @@ form.addEventListener('submit', (e) => {
     }
     list.render(doc, type.value, 'end');
 });
+// GENERIC
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docOne = addUID({ name: 'Joker', age: 21 });
+// let docTwo = addUID('Hello') -> get error, because function return object with
+console.log(docOne.name);
+// ENUMS
+var resourceType;
+(function (resourceType) {
+    resourceType[resourceType["BOOK"] = 0] = "BOOK";
+    resourceType[resourceType["AUTHOR"] = 1] = "AUTHOR";
+    resourceType[resourceType["FILM"] = 2] = "FILM";
+    resourceType[resourceType["VIDEO"] = 3] = "VIDEO";
+    resourceType[resourceType["PERSON"] = 4] = "PERSON";
+    resourceType[resourceType["DIRECTOR"] = 5] = "DIRECTOR";
+    resourceType[resourceType["GIMMICK"] = 6] = "GIMMICK";
+})(resourceType || (resourceType = {}));
+const docThree = {
+    uid: 1,
+    resourceType: resourceType.AUTHOR,
+    data: { name: 'Joker' }
+};
+const docFour = {
+    uid: 2,
+    resourceType: resourceType.GIMMICK,
+    data: ['Pk ring', 'IT', 'Deck']
+};
+console.log(docThree, docFour);
+let arr = ['Joker', 21, true];
+arr[0] = 'Joker boy';
+arr = ['Joker'];
+console.log(arr);

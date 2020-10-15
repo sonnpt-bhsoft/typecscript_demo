@@ -3,36 +3,6 @@ import { ListTemplate } from './classes/listTemplate.js';
 import { Payment } from './classes/Payment.js'
 import { hasFormatter } from './interfaces/hasFormatter.js'
 
-// let docOne: hasFormatter;
-// let docTwo: hasFormatter;
-
-
-// docOne = new Invoice('mario', 'web work', 250);
-// docTwo = new Payment('joker', 'thaison', 200);
-
-
-// let docs: hasFormatter[] = [];
-// docs.push(docOne);
-// docs.push(docTwo);
-
-
-// console.log(docs);
-
-
-// const invoiceOne = new Invoice( 'mario', 'working on the mario website', 250);
-// const invoiceTwo = new Invoice( 'luigi', 'working on the luigi website', 300)
-
-// let invoices: Invoice[] = [];
-// invoices.push(invoiceOne);
-// invoices.push(invoiceTwo);
-
-// invoices.forEach(inv => {
-//     console.log(inv.client, inv.amount, inv.format());
-// })
-
-// const form = document.querySelector('form')!
-
-
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 // inputs
 const type = document.querySelector('#type') as HTMLSelectElement;
@@ -54,6 +24,49 @@ form.addEventListener('submit', (e: Event) => {
         doc = new Payment(tofrom.value, details.value, amount.valueAsNumber)
     }
     
-    list.render(doc, type.value, 'end')
-
+    list.render(doc, type.value, 'end') 
 })
+
+// GENERIC
+const addUID = <T extends object>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100)
+    return {...obj, uid}
+}
+
+let docOne = addUID({ name: 'Joker', age: 21 });
+// let docTwo = addUID('Hello') -> get error, because function return object with
+
+console.log(docOne.name);
+
+
+// ENUMS
+enum resourceType { BOOK, AUTHOR, FILM, VIDEO, PERSON, DIRECTOR, GIMMICK }
+
+// GENERIC with interfaces
+interface Resource<T> {
+    uid: number;
+    resourceType: resourceType;
+    data: T
+}
+
+
+const docThree: Resource<object> = {
+    uid: 1,
+    resourceType: resourceType.AUTHOR,
+    data: { name: 'Joker'}
+}
+
+const docFour: Resource<string[]> = {
+    uid: 2,
+    resourceType: resourceType.GIMMICK,
+    data: ['Pk ring', 'IT', 'Deck']
+}
+
+console.log(docThree, docFour);
+
+
+let arr = ['Joker', 21, true];
+arr[0] = 'Joker boy'
+arr = ['Joker']
+console.log(arr);
+
